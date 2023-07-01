@@ -1,2 +1,2 @@
-@extends('layouts.template_main')
+@extends('layouts.main')
 @section('title', '| Welcome')
