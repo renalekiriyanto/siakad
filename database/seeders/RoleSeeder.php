@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 class RoleSeeder extends Seeder
@@ -34,8 +35,30 @@ class RoleSeeder extends Seeder
             ]
         ];
 
+        $data_permissions = [
+            [
+                'name' => 'list user'
+            ],
+            [
+                'name' => 'tambah user'
+            ],
+            [
+                'name' => 'hapus user'
+            ],
+            [
+                'name' => 'edit user'
+            ]
+        ];
+
+        foreach ($data_permissions as $item) {
+            Permission::create($item);
+        }
+
         foreach ($data as $item) {
             $role = Role::create($item);
+            if ($role->name == 'root') {
+                $role->givePermissionTo(['list user', 'tambah user', 'hapus user', 'edit user']);
+            }
         }
     }
 }

@@ -15,10 +15,24 @@ class AuthController extends Controller
         return view('auth.login');
     }
 
+    protected function attemptLogin(Request $request)
+    {
+        return Auth::guard('web')->attempt(
+            $this->credentials($request),
+            $request->filled('remember')
+        );
+    }
+
+    protected function authenticated(Request $request, $user)
+    {
+        $request->session()->regenerate();
+        return redirect()->intended($this->redirectPath());
+    }
+
     public function login(Request $request)
     {
         $data = $request->validate([
-            'email' => ['required', 'email', 'string'],
+            'username' => ['required', 'string'],
             'password' => ['required', 'string']
         ]);
 
@@ -29,13 +43,20 @@ class AuthController extends Controller
 
         // jika hash tidak sesuai redirect ke halaman forbidden
         // $user = User::where('username', $request->username)->first();
-        $user = User::where('email', $request->email)->first();
+        $user = User::where('username', $request->username)->first();
         if (!Hash::check($request->password, $user->password, [])) {
             abort(403, 'Invalid credential');
             return view('errors.401');
         }
 
-        return redirect()->route('dashboard');
+        if (Auth::attempt($data)) {
+            $request->session()->regenerate();
+            return redirect()->route('dashboard');
+        }
+
+        return back()->withErrors([
+            'username' => 'The provided credentials do not match our records.',
+        ]);
     }
 
     public function logout(Request $request)

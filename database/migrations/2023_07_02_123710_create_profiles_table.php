@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('alamat')->nullable();
             $table->string('no_hp')->nullable();
-            $table->string('photo')->nullable();
+            $table->string('photo')->nullable()->default('img/avatar.png');
             $table->char('gender')->nullable();
             $table->string('tempat_lahir');
             $table->date('tanggal_lahir');

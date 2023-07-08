@@ -24,6 +24,7 @@ class UserSeeder extends Seeder
 
         $user = User::create([
             'name' => 'Renal Eki Riyanto',
+            'username' => 'renaleki',
             'email' => 'renaleki@test.com',
             'password' => Hash::make('password'),
             'role_id' => $role->id
@@ -36,7 +37,6 @@ class UserSeeder extends Seeder
             'alamat' => 'Dusun Pengijauan Kari',
             'no_hp' => '082390460261',
             'gender' => 'L',
-            'photo' => url('img/avatar.png'),
             'tempat_lahir' => 'Dusun Pengijauan Kari',
             'tanggal_lahir' => Carbon::parse('1999-07-16')->format('Y-m-d'),
             'agama' => 'Islam',
