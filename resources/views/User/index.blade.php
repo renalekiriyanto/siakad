@@ -53,18 +53,56 @@
                                                 <td>{{ $item->profile->alamat }}</td>
                                                 <td>
                                                     <button class="btn btn-block btn-success btn-sm">Edit</button>
+                                                    <button type="submit" class="btn btn-block btn-danger btn-sm"
+                                                        data-toggle="modal" data-target="#modal-lock-user"><i
+                                                            class="fas fa-lock"></i></button>
+                                                    {{-- Modal Lock User --}}
+                                                    <div class="modal fade" id="modal-lock-user">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h4 class="modal-title">Konfirmasi Penguncian Akun</h4>
+                                                                    <button type="button" class="close"
+                                                                        data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <form action="{{ route('lock_user', $item->id) }}"
+                                                                    method="post">
+                                                                    <div class="modal-body">
+                                                                        <div class="form-group">
+                                                                            <label for="password">Password Konfirmasi
+                                                                                Penguncian</label>
+                                                                            <input type="text" class="form-control"
+                                                                                id="password" name="password"
+                                                                                placeholder="Masukkan password">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="modal-footer justify-content-between">
+                                                                        <button type="button" class="btn btn-default"
+                                                                            data-dismiss="modal">Close</button>
+                                                                        <button type="submit" class="btn btn-primary">Kunci
+                                                                            Akun</button>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                            <!-- /.modal-content -->
+                                                        </div>
+                                                        <!-- /.modal-dialog -->
+                                                    </div>
                                                 </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
+                                <br>
+                                {{ $data->links('pagination::bootstrap-5') }}
                             </div>
-                            <!-- /.card-body -->
                         </div>
                     </div>
-                    <!-- /.col -->
                 </div>
             </div>
         </section>
+
     </div>
 @endsection
