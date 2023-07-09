@@ -21,16 +21,16 @@ class UserController extends Controller
 
     public function lock_user(Request $request, User $user)
     {
-        $currentUser = Auth::user();
         $request->validate([
             'password' => ['required', 'string']
         ]);
 
+        $currentUser = Auth::user();
         // User harus masukkan passsword dulu untuk melakukan aksi kunci user
-        if (Hash::check([$request->password], $currentUser->password)) {
-            $user->update([
-                'is_verified' => false
-            ]);
+        if (Hash::check($request->password, $currentUser->password)) {
+            $user->is_verified = !$user->is_verified;
+            $user->save();
+            return redirect()->back();
         } else {
             return redirect()->back()->withErrors(['password' => 'Password yang dimasukkan salah.']);
         }

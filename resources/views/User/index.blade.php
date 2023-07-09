@@ -46,18 +46,21 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($data as $item)
-                                            <tr key={{ $item->id }}>
+                                            <tr key={{ $item->id }}
+                                                class="@if (!$item->is_verified) bg-warning @endif">
                                                 <td>{{ $item->name }}</td>
                                                 <td>{{ $item->role->full_name }}</td>
                                                 <td>{{ $item->email }}</td>
                                                 <td>{{ $item->profile->alamat }}</td>
                                                 <td>
                                                     <button class="btn btn-block btn-success btn-sm">Edit</button>
-                                                    <button type="submit" class="btn btn-block btn-danger btn-sm"
-                                                        data-toggle="modal" data-target="#modal-lock-user"><i
-                                                            class="fas fa-lock"></i></button>
+                                                    <button type="submit"
+                                                        class="btn btn-block btn-{{ $item->is_verified ? 'danger' : 'primary' }} btn-sm"
+                                                        data-toggle="modal"
+                                                        data-target="#modal-lock-user{{ $item->id }}"><i
+                                                            class="fas fa-{{ $item->is_verified ? 'lock' : 'unlock' }}"></i></button>
                                                     {{-- Modal Lock User --}}
-                                                    <div class="modal fade" id="modal-lock-user">
+                                                    <div class="modal fade" id="modal-lock-user{{ $item->id }}">
                                                         <div class="modal-dialog">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
@@ -67,13 +70,14 @@
                                                                         <span aria-hidden="true">&times;</span>
                                                                     </button>
                                                                 </div>
-                                                                <form action="{{ route('lock_user', $item->id) }}"
+                                                                <form action="{{ route('lock_user', "$item->id") }}"
                                                                     method="post">
+                                                                    @csrf
                                                                     <div class="modal-body">
                                                                         <div class="form-group">
                                                                             <label for="password">Password Konfirmasi
                                                                                 Penguncian</label>
-                                                                            <input type="text" class="form-control"
+                                                                            <input type="password" class="form-control"
                                                                                 id="password" name="password"
                                                                                 placeholder="Masukkan password">
                                                                         </div>
@@ -86,10 +90,9 @@
                                                                     </div>
                                                                 </form>
                                                             </div>
-                                                            <!-- /.modal-content -->
                                                         </div>
-                                                        <!-- /.modal-dialog -->
                                                     </div>
+                                                    {{-- Modal Lock User --}}
                                                 </td>
                                             </tr>
                                         @endforeach
