@@ -38,32 +38,25 @@
                                     <thead>
                                         <tr>
                                             <th>Nama</th>
-                                            <th>Browser</th>
-                                            <th>Platform(s)</th>
-                                            <th>Engine version</th>
-                                            <th>CSS grade</th>
+                                            <th>Role</th>
+                                            <th>E-mail</th>
+                                            <th>Alamat</th>
+                                            <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>Trident</td>
-                                            <td>Internet
-                                                Explorer 4.0
-                                            </td>
-                                            <td>Win 95+</td>
-                                            <td> 4</td>
-                                            <td>X</td>
-                                        </tr>
+                                        @foreach ($data as $item)
+                                            <tr key={{ $item->id }}>
+                                                <td>{{ $item->name }}</td>
+                                                <td>{{ $item->role->full_name }}</td>
+                                                <td>{{ $item->email }}</td>
+                                                <td>{{ $item->profile->alamat }}</td>
+                                                <td>
+                                                    <button class="btn btn-block btn-success btn-sm">Edit</button>
+                                                </td>
+                                            </tr>
+                                        @endforeach
                                     </tbody>
-                                    <tfoot>
-                                        <tr>
-                                            <th>Rendering engine</th>
-                                            <th>Browser</th>
-                                            <th>Platform(s)</th>
-                                            <th>Engine version</th>
-                                            <th>CSS grade</th>
-                                        </tr>
-                                    </tfoot>
                                 </table>
                             </div>
                             <!-- /.card-body -->
@@ -71,11 +64,7 @@
                     </div>
                     <!-- /.col -->
                 </div>
-                <!-- /.row -->
             </div>
-            <!-- /.container-fluid -->
         </section>
-        <!-- /.content -->
     </div>
-    <!-- /.content-wrapper -->
 @endsection

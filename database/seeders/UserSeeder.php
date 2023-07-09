@@ -10,6 +10,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\URL;
 use Spatie\Permission\Models\Role;
+use Faker\Factory as Faker;
 
 class UserSeeder extends Seeder
 {
@@ -27,7 +28,8 @@ class UserSeeder extends Seeder
             'username' => 'renaleki',
             'email' => 'renaleki@test.com',
             'password' => Hash::make('password'),
-            'role_id' => $role->id
+            'role_id' => $role->id,
+            'is_verified' => true
         ]);
 
         $user->assignRole('root');
@@ -42,5 +44,35 @@ class UserSeeder extends Seeder
             'agama' => 'Islam',
             'golongan_darah' => 'AB+'
         ]);
+
+        // Faker user
+
+        $faker = Faker::create('id_ID');
+        for ($i = 1; $i <= 50; $i++) {
+            $user = User::create([
+                'name' => $faker->name(),
+                'username' => $faker->userName(),
+                'email' => $faker->email(),
+                'password' => Hash::make('password'),
+                'role_id' => $faker->numberBetween(1, 4)
+            ]);
+            $role = Role::find($user->role_id)->first();
+            $user->assignRole($role->name);
+            if ($user->role_id === 1) {
+                $user->is_verified = true;
+                $user->save();
+            }
+
+            $profile = Profile::create([
+                'user_id' => $user->id,
+                'alamat' => $faker->address(),
+                'no_hp' => $faker->phoneNumber(),
+                'gender' => $faker->randomElement(['L', 'P']),
+                'tempat_lahir' => $faker->address(),
+                'tanggal_lahir' => $faker->date('Y_m_d'),
+                'agama' => $faker->randomElement(['Islam', 'Katolik', 'Protestan', 'Buddha', 'Hindu'], null),
+                'golongan_darah' => $faker->randomElement(['O+', 'A+', 'B+', 'AB+', 'O-', 'A-', 'B-', 'AB-'], null)
+            ]);
+        }
     }
 }

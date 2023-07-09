@@ -49,6 +49,11 @@ class AuthController extends Controller
             return view('errors.401');
         }
 
+        if (!$user->is_verified) {
+            abort(403, 'Unauthorized');
+            return view('errors.403');
+        }
+
         if (Auth::attempt($data)) {
             $request->session()->regenerate();
             return redirect()->route('dashboard');
