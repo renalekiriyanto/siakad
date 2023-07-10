@@ -10,13 +10,56 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+    protected $user;
+
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            $this->user = Auth::user();
+
+            return $next($request);
+        });
+    }
+
     public function index()
     {
         $data = User::paginate(10);
-        $user = Auth::user();
-        $profile = Profile::where('user_id', $user->id)->first();
+        $user = $this->user;
 
-        return view('User.index', compact('data', 'profile', 'user'));
+        return view('User.index', compact('data', 'user'));
+    }
+
+    public function tambah()
+    {
+        $user = $this->user;
+        $list_gender = [
+            [
+                'value' => 'L',
+                'nama' => 'Laki-laki'
+            ],
+            [
+                'value' => 'P',
+                'nama' => 'Perempuan'
+            ]
+        ];
+        $list_agama = [
+            [
+                'value' => 'Islam'
+            ],
+            [
+                'value' => 'Katolik'
+            ],
+            [
+                'value' => 'Protestan'
+            ],
+            [
+                'value' => 'Hindu'
+            ],
+            [
+                'value' => 'Buddha'
+            ]
+        ];
+        return view('User.tambah', compact('user', 'list_gender', 'list_agama'));
     }
 
     public function lock_user(Request $request, User $user)

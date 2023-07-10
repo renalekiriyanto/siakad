@@ -29,5 +29,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::prefix('user')->group(function () {
         Route::get('/', [UserController::class, 'index'])->name('user');
         Route::post('/{user}', [UserController::class, 'lock_user'])->name('lock_user');
+        Route::get('tambah', [UserController::class, 'tambah'])->name('tambah_user');
     });
 });

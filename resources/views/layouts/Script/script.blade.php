@@ -34,3 +34,24 @@
 <script src="{{ asset('plugins/datatables-buttons/js/buttons.html5.min.js') }}></script>
 <script src="{{ asset('plugins/datatables-buttons/js/buttons.print.min.js') }}></script>
 <script src="{{ asset('plugins/datatables-buttons/js/buttons.colVis.min.js') }}></script>
+<!-- BS-Stepper -->
+<script src="{{ asset('plugins/bs-stepper/js/bs-stepper.min.js') }}"></script>
+<!-- Select2 -->
+<script src="{{ asset('plugins/select2/js/select2.full.min.js') }}"></script>
+<!-- InputMask -->
+<script src="{{ asset('plugins/moment/moment.min.js') }}"></script>
+<script src="{{ asset('plugins/inputmask/jquery.inputmask.min.js') }}"></script>
+<!-- date-range-picker -->
+<script src="{{ asset('plugins/daterangepicker/daterangepicker.js') }}"></script>
+<!-- Tempusdominus Bootstrap 4 -->
+<script src="{{ asset('plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') }}"></script>
+<script>
+    // BS-Stepper Init
+    document.addEventListener('DOMContentLoaded', function() {
+        window.stepper = new Stepper(document.querySelector('.bs-stepper'))
+    })
+    //Date picker
+    $('#reservationdate').datetimepicker({
+        format: 'L'
+    });
+</script>

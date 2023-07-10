@@ -26,7 +26,7 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="mb-3">
-                            <button type="button" class="btn btn-primary">Tambah</button>
+                            <a href="{{ route('tambah_user') }}" class="btn btn-primary">Tambah</a>
                         </div>
                         <div class="card">
                             <div class="card-header">
