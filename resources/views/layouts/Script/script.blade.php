@@ -45,6 +45,8 @@
 <script src="{{ asset('plugins/daterangepicker/daterangepicker.js') }}"></script>
 <!-- Tempusdominus Bootstrap 4 -->
 <script src="{{ asset('plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') }}"></script>
+<!-- dropzonejs -->
+<script src="{{ asset('plugins/dropzone/min/dropzone.min.js') }}"></script>
 <script>
     // BS-Stepper Init
     document.addEventListener('DOMContentLoaded', function() {

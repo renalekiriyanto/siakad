@@ -946,7 +946,7 @@
         @include('layouts.Footer.footer')
     </div>
     <!-- ./wrapper -->
-
+    @livewireScripts
     @include('layouts.Script.script')
 </body>
 

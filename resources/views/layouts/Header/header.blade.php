@@ -22,4 +22,5 @@
     <link rel="stylesheet" href="{{ asset('css/adminlte.min.css') }}">
     <!-- daterange picker -->
     <link rel="stylesheet" href="{{ asset('plugins/daterangepicker/daterangepicker.css') }}">
+    @livewireStyles
 </header>
