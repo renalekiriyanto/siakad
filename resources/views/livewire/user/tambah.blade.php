@@ -50,13 +50,13 @@
                                             @endforeach
                                         </select>
                                     </div>
-                                    @if ($role === 2)
+                                    @if ($role == 2)
                                         <div class="form-group">
                                             <label for="nip">NIP</label>
                                             <input type="nip" class="form-control" placeholder="Masukkan NIP"
                                                 wire:model="nip" />
                                         </div>
-                                    @elseif($role === 3)
+                                    @elseif($role == 3)
                                         <div class="form-group">
                                             <label for="nis">NIS</label>
                                             <input type="nis" class="form-control" placeholder="Masukkan NIS"
@@ -124,19 +124,6 @@
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
-                                            {{-- <div class="form-group">
-                                                <label>Tanggal Lahir</label>
-                                                <div class="input-group date" id="reservationdate"
-                                                    data-target-input="nearest">
-                                                    <input type="text" class="form-control datetimepicker-input"
-                                                        data-target="#reservationdate" />
-                                                    <div class="input-group-append" data-target="#reservationdate"
-                                                        data-toggle="datetimepicker">
-                                                        <div class="input-group-text"><i class="fa fa-calendar"></i>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div> --}}
                                             <div class="form-group">
                                                 <label for="tanggal_lahir">Tanggal Lahir</label>
                                                 <input type="date" class="form-control"
@@ -145,6 +132,21 @@
                                         </div>
                                     </div>
                                 </div>
+                            @endif
+                            @if ($stepper == 3)
+                                @if ($role == 2)
+                                    <div class="form-group">
+                                        <label for="alamat">Alamat</label>
+                                        <input type="text" class="form-control" placeholder="Masukkan alamat"
+                                            wire:model="alamat" />
+                                    </div>
+                                @else
+                                    <div class="form-group">
+                                        <label for="alamat">Alamat</label>
+                                        <input type="text" class="form-control" placeholder="Masukkan alamat"
+                                            wire:model="alamat" />
+                                    </div>
+                                @endif
                             @endif
                             <div>
                                 @if ($stepper !== 1)
