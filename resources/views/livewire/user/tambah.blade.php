@@ -10,70 +10,71 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label for="name">Nama</label>
-                                        <input type="text" class="form-control" wire:model="name"
-                                            placeholder="Masukkan nama">
-                                    </div>
+                            <div class="bs-stepper">
+                                <div class="bs-stepper-header" role="tablist">
+                                    <!-- your steps here -->
+                                    @foreach ($list_stepper as $item)
+                                        <div class="step @if ($item['value'] == $stepper) active @endif "
+                                            data-target="#{{ $item['slug'] }}-part">
+                                            <button type="button" class="step-trigger" role="tab"
+                                                aria-controls="{{ $item['slug'] }}-part"
+                                                id="{{ $item['slug'] }}-part-trigger">
+                                                <span class="bs-stepper-circle">{{ $item['value'] }}</span>
+                                                <span class="bs-stepper-label">{{ $item['name'] }}</span>
+                                            </button>
+                                        </div>
+                                        <div class="line"></div>
+                                    @endforeach
                                 </div>
-                                <div class="col-sm-6">
+                            </div>
+                            {{-- User --}}
+                            @if ($stepper == 1)
+                                <div>
+                                    <div class="form-group">
+                                        <label for="name">Nama Lengkap</label>
+                                        <input type="text" class="form-control" placeholder="Masukkan nama lengkap"
+                                            wire:model="name" />
+                                    </div>
                                     <div class="form-group">
                                         <label for="email">E-mail</label>
-                                        <input type="email" class="form-control" wire:model="email"
-                                            placeholder="Masukkan email">
+                                        <input type="email" class="form-control" placeholder="Masukkan email"
+                                            wire:model="email" />
                                     </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <select class="form-control select2bs4" wire:model="role">
-                                    <option value="" selected>---Pilih Role---</option>
-                                    @foreach ($roles as $item)
-                                        <option value="{{ $item->id }}">{{ $item->full_name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="row">
-                                <div class="col-6">
-                                    @if ($role == 3)
+                                    <div class="form-group">
+                                        <label>Role</label>
+                                        <select class="form-control" wire:model="role">
+                                            @foreach ($roles as $item)
+                                                <option value="{{ $item->id }}">{{ $item->full_name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    @if ($role === 2)
                                         <div class="form-group">
                                             <label for="nip">NIP</label>
-                                            <input type="text" class="form-control" wire:model="nip"
-                                                placeholder="Masukkan nip">
+                                            <input type="nip" class="form-control" placeholder="Masukkan NIP"
+                                                wire:model="nip" />
                                         </div>
-                                    @elseif($role == 4)
+                                    @elseif($role === 3)
                                         <div class="form-group">
                                             <label for="nis">NIS</label>
-                                            <input type="text" class="form-control" wire:model="nis"
-                                                placeholder="Masukkan nis">
+                                            <input type="nis" class="form-control" placeholder="Masukkan NIS"
+                                                wire:model="nis" />
                                         </div>
                                     @else
                                         <div class="form-group">
                                             <label for="username">Username</label>
-                                            <input type="text" class="form-control" wire:model="username"
-                                                placeholder="Masukkan username">
+                                            <input type="username" class="form-control" placeholder="Masukkan username"
+                                                wire:model="username" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="password">Password</label>
+                                            <input type="password" class="form-control" placeholder="Masukkan password"
+                                                wire:model="password" />
                                         </div>
                                     @endif
+                                    <button class="btn btn-primary" wire:click="increment">Selanjutnya</button>
                                 </div>
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <label for="password">Password</label>
-                                        <input type="{{ $showPassword ? 'text' : 'password' }}" class="form-control"
-                                            wire:model="password" placeholder="Masukkan password">
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="">
-                                            <div class="form-check">
-                                                <input type="checkbox" class="form-check-input" id="showPassword"
-                                                    wire:model="showPassword">
-                                                <label class="form-check-label" for="showPassword">Lihat
-                                                    password</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            @endif
                         </div>
                     </div>
                 </div>

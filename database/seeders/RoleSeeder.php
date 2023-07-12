@@ -18,10 +18,6 @@ class RoleSeeder extends Seeder
     {
         $data = [
             [
-                'name' => 'root',
-                'full_name' => 'Root'
-            ],
-            [
                 'name' => 'admin',
                 'full_name' => 'Admin'
             ],
@@ -56,7 +52,7 @@ class RoleSeeder extends Seeder
 
         foreach ($data as $item) {
             $role = Role::create($item);
-            if ($role->name == 'root') {
+            if ($role->name == 'admin') {
                 $role->givePermissionTo(['list user', 'tambah user', 'hapus user', 'edit user']);
             }
         }

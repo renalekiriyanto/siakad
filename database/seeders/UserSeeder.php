@@ -21,7 +21,7 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        $role = Role::where('name', 'root')->first();
+        $role = Role::where('name', 'admin')->first();
 
         $user = User::create([
             'name' => 'Renal Eki Riyanto',
@@ -32,7 +32,7 @@ class UserSeeder extends Seeder
             'is_verified' => true
         ]);
 
-        $user->assignRole('root');
+        $user->assignRole('admin');
 
         $profile = Profile::create([
             'user_id' => $user->id,
@@ -54,7 +54,7 @@ class UserSeeder extends Seeder
                 'username' => $faker->userName(),
                 'email' => $faker->email(),
                 'password' => Hash::make('password'),
-                'role_id' => $faker->numberBetween(1, 4)
+                'role_id' => $faker->numberBetween(1, 3)
             ]);
             $role = Role::find($user->role_id)->first();
             $user->assignRole($role->name);

@@ -30,7 +30,7 @@
                 </div>
             </div>
         </div>
-        @if ($user->hasRole('root'))
+        @if ($user->hasRole('admin'))
             <!-- Sidebar Menu -->
             <nav class="mt-2">
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
