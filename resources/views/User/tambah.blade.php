@@ -23,34 +23,4 @@
 
         <livewire:user.tambah />
     </div>
-    <script>
-        let role = document.getElementById('role')
-        let guruStepperHeader = document.getElementById('guruStepperHeader')
-        let siswaStepperHeader = document.getElementById('siswaStepperHeader')
-        let divProfile = document.getElementById('divProfile')
-
-        guruStepperHeader.style.display = 'none';
-        siswaStepperHeader.style.display = 'none';
-        divProfile.style.display = 'none';
-
-        role.addEventListener('change', () => {
-            // Guru
-            if (role.value == 3) {
-                divProfile.style.display = 'block';
-
-                guruStepperHeader.style.display = 'block';
-                siswaStepperHeader.style.display = 'none';
-            }
-            // Siswa
-            else if (role.value == 4) {
-                divProfile.style.display = 'block';
-                guruStepperHeader.style.display = 'none';
-                siswaStepperHeader.style.display = 'block';
-            } else {
-                divProfile.style.display = 'none';
-                guruStepperHeader.style.display = 'none';
-                siswaStepperHeader.style.display = 'none';
-            }
-        })
-    </script>
 @endsection

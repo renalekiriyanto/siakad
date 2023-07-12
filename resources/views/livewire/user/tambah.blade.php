@@ -23,7 +23,9 @@
                                                 <span class="bs-stepper-label">{{ $item['name'] }}</span>
                                             </button>
                                         </div>
-                                        <div class="line"></div>
+                                        @if (count($list_stepper) > $item['value'])
+                                            <div class="line"></div>
+                                        @endif
                                     @endforeach
                                 </div>
                             </div>
@@ -72,9 +74,88 @@
                                                 wire:model="password" />
                                         </div>
                                     @endif
-                                    <button class="btn btn-primary" wire:click="increment">Selanjutnya</button>
                                 </div>
                             @endif
+                            @if ($stepper == 2)
+                                <div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="alamat">Alamat</label>
+                                                <input type="text" class="form-control" placeholder="Masukkan alamat"
+                                                    wire:model="alamat" />
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="no_hp">No. HP</label>
+                                                <input type="text" class="form-control" placeholder="Masukkan No. HP"
+                                                    wire:model="no_hp" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="photo">Photo</label>
+                                                <input type="file" class="form-control" placeholder="Masukkan photo"
+                                                    wire:model="photo" />
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="no_hp">Gender</label>
+                                                <select class="form-control" wire:model="gender">
+                                                    <option value="">---Pilih Jenis Kelamin---</option>
+                                                    @foreach ($list_gender as $item)
+                                                        <option value="{{ $item['value'] }}">{{ $item['nama'] }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="tempat_lahir">Tempat Lahir</label>
+                                                <input type="text" class="form-control"
+                                                    placeholder="Masukkan tempat lahir" wire:model="tempat_lahir" />
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            {{-- <div class="form-group">
+                                                <label>Tanggal Lahir</label>
+                                                <div class="input-group date" id="reservationdate"
+                                                    data-target-input="nearest">
+                                                    <input type="text" class="form-control datetimepicker-input"
+                                                        data-target="#reservationdate" />
+                                                    <div class="input-group-append" data-target="#reservationdate"
+                                                        data-toggle="datetimepicker">
+                                                        <div class="input-group-text"><i class="fa fa-calendar"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div> --}}
+                                            <div class="form-group">
+                                                <label for="tanggal_lahir">Tanggal Lahir</label>
+                                                <input type="date" class="form-control"
+                                                    placeholder="Masukkan tanggal lahir" wire:model="tanggal_lahir" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
+                            <div>
+                                @if ($stepper !== 1)
+                                    <button class="btn btn-primary mr-3" wire:click="decrement">Sebelumnya</button>
+                                @endif
+                                @if ($stepper !== count($list_stepper))
+                                    <button class="btn btn-primary" wire:click="increment">Selanjutnya</button>
+                                @else
+                                    <button class="btn btn-primary" wire:click="store">Submit</button>
+                                @endif
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -85,4 +166,10 @@
             </div> --}}
         </div>
     </section>
+    <script>
+        //Date picker
+        $('#reservationdate').datetimepicker({
+            format: 'L'
+        });
+    </script>
 </div>

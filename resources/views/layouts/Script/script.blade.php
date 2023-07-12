@@ -1,6 +1,6 @@
 <!-- REQUIRED SCRIPTS -->
 <!-- jQuery -->
-<script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
+<script src="{{ asset('plugins/jquery/jquery.js') }}"></script>
 <!-- Bootstrap -->
 <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <!-- overlayScrollbars -->
@@ -52,8 +52,16 @@
     document.addEventListener('DOMContentLoaded', function() {
         window.stepper = new Stepper(document.querySelector('.bs-stepper'))
     })
-    //Date picker
+
+    // $(function() {
     $('#reservationdate').datetimepicker({
         format: 'L'
     });
+
+    $('#reservationdatetime').datetimepicker({
+        icons: {
+            time: 'far fa-clock'
+        }
+    });
+    // })
 </script>

@@ -11,7 +11,6 @@ class Tambah extends Component
 {
     use WithFileUploads;
 
-    public $photo;
     public $password;
     public $showPassword;
     public $role;
@@ -23,6 +22,15 @@ class Tambah extends Component
     // Stepper
     public $stepper;
     public $list_stepper = [];
+    // Profile
+    public $alamat;
+    public $no_hp;
+    public $photo;
+    public $gender;
+    public $tempat_lahir;
+    public $tanggal_lahir;
+    public $agama;
+    public $golongan_darah;
 
     public function mount()
     {
@@ -102,8 +110,17 @@ class Tambah extends Component
         return view('livewire.user.tambah', compact('list_gender', 'list_agama', 'roles'));
     }
 
+    public function store()
+    {
+    }
+
     public function increment()
     {
         $this->stepper += 1;
+    }
+
+    public function decrement()
+    {
+        $this->stepper -= 1;
     }
 }
