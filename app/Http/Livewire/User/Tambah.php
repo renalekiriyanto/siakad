@@ -2,6 +2,10 @@
 
 namespace App\Http\Livewire\User;
 
+use App\Models\Golongan;
+use App\Models\Jabatan;
+use App\Models\Pangkat;
+use App\Models\Pendidikan;
 use Illuminate\Support\Collection;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -14,8 +18,6 @@ class Tambah extends Component
     public $password;
     public $showPassword;
     public $role;
-    public $nis;
-    public $nip;
     public $username;
     public $name;
     public $email;
@@ -31,6 +33,22 @@ class Tambah extends Component
     public $tanggal_lahir;
     public $agama;
     public $golongan_darah;
+    // Guru
+    public $nuptk;
+    public $nrg;
+    public $pangkat;
+    public $golongan;
+    public $jabatan;
+    public $pendidikan;
+    public $nip;
+    public $nik;
+    public $list_pangkat;
+    public $list_golongan;
+    public $list_jabatan;
+    public $list_pendidikan;
+    // Siswa
+    public $nis;
+    public $nisn;
 
     public function mount()
     {
@@ -47,6 +65,63 @@ class Tambah extends Component
             'slug' => 'profile',
             'name' => 'Profile'
         ]);
+        $this->list_pangkat = Pangkat::all();
+        $this->list_golongan = Golongan::all();
+        $this->list_jabatan = Jabatan::all();
+        $this->list_pendidikan = Pendidikan::all();
+    }
+
+    public function rules()
+    {
+        if ($this->role == 2) {
+            return [
+                'name' => ['required', 'string', 'max:255'],
+                'email' => ['email', 'not:in:' . auth()->user()->email],
+                'role' => ['required'],
+                'nip' => ['required', 'string', 'size:18'],
+                'alamat' => ['string', 'max:255'],
+                'no_hp' => ['string', 'max:255'],
+                'gender' => ['required', 'string'],
+                'tempat_lahir' => ['required', 'string', 'max:255'],
+                'tanggal_lahir' => ['required', 'date', 'max:255'],
+                'nuptk' => ['required', 'string', 'size:16'],
+                'nrg' => ['required', 'string', 'size:12'],
+                'pangkat' => ['required', 'string', 'max:255'],
+                'golongan' => ['required', 'string', 'max:255'],
+                'jabatan' => ['required', 'string', 'max:255'],
+                'pendidikan' => ['required', 'string', 'max:255'],
+            ];
+        } else if ($this->role == 3) {
+            return [
+                'name' => ['required', 'string', 'max:255'],
+                'email' => ['email', 'not:in:' . auth()->user()->email],
+                'role' => ['required'],
+                'nis' => ['required', 'string', 'size:18'],
+                'alamat' => ['string', 'max:255'],
+                'no_hp' => ['string', 'max:255'],
+                'gender' => ['required', 'string'],
+                'tempat_lahir' => ['required', 'string', 'max:255'],
+                'tanggal_lahir' => ['required', 'date', 'max:255'],
+                'nuptk' => ['required', 'string', 'size:16'],
+                'nrg' => ['required', 'string', 'size:12'],
+                'pangkat' => ['required', 'string', 'max:255'],
+                'golongan' => ['required', 'string', 'max:255'],
+                'jabatan' => ['required', 'string', 'max:255'],
+                'pendidikan' => ['required', 'string', 'max:255'],
+            ];
+        }
+        return [
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['email', 'not:in:' . auth()->user()->email],
+            'role' => ['required'],
+            'username' => ['required', 'string', 'max:255'],
+            'password' => ['required', 'string', 'max:255'],
+            'alamat' => ['string', 'max:255'],
+            'no_hp' => ['string', 'max:255'],
+            'gender' => ['required', 'string'],
+            'tempat_lahir' => ['required', 'string', 'max:255'],
+            'tanggal_lahir' => ['required', 'date', ' max:255'],
+        ];
     }
 
     public function render()

@@ -45,6 +45,7 @@
                                     <div class="form-group">
                                         <label>Role</label>
                                         <select class="form-control" wire:model="role">
+                                            <option value="">---Pilih Role---</option>
                                             @foreach ($roles as $item)
                                                 <option value="{{ $item->id }}">{{ $item->full_name }}</option>
                                             @endforeach
@@ -54,15 +55,10 @@
                                         <div class="form-group">
                                             <label for="nip">NIP</label>
                                             <input type="nip" class="form-control" placeholder="Masukkan NIP"
-                                                wire:model="nip" />
+                                                wire:model="nip" maxlength="18" />
                                         </div>
-                                    @elseif($role == 3)
-                                        <div class="form-group">
-                                            <label for="nis">NIS</label>
-                                            <input type="nis" class="form-control" placeholder="Masukkan NIS"
-                                                wire:model="nis" />
-                                        </div>
-                                    @else
+                                    @endif
+                                    @if ($role == 1)
                                         <div class="form-group">
                                             <label for="username">Username</label>
                                             <input type="username" class="form-control" placeholder="Masukkan username"
@@ -134,26 +130,107 @@
                                 </div>
                             @endif
                             @if ($stepper == 3)
+                                {{-- Guru --}}
                                 @if ($role == 2)
-                                    <div class="form-group">
-                                        <label for="alamat">Alamat</label>
-                                        <input type="text" class="form-control" placeholder="Masukkan alamat"
-                                            wire:model="alamat" />
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="nuptk">NUPTK</label>
+                                                <input type="text" class="form-control"
+                                                    placeholder="Masukkan NUPTK" wire:model="nuptk" maxlength="16" />
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="nrg">NRG</label>
+                                                <input type="text" class="form-control" placeholder="Masukkan NRG"
+                                                    wire:model="nrg" maxlength="16" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="pangkat">Pangkat</label>
+                                                <select class="form-control" id="pangkat" wire:model="pangkat">
+                                                    <option value="">---Pilih Jenis Pangkat---</option>
+                                                    @foreach ($list_pangkat as $item)
+                                                        <option value="{{ $item->id }}">{{ $item->nama }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="golongan">Golongan</label>
+                                                <select class="form-control" id="golongan" wire:model="golongan">
+                                                    <option value="">---Pilih Jenis Golongan---</option>
+                                                    @foreach ($list_golongan as $item)
+                                                        <option value="{{ $item->id }}">
+                                                            {{ $item->pangkat }} - {{ $item->nama }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="jabatan">Jabatan</label>
+                                                <select class="form-control" id="jabatan" wire:model="jabatan">
+                                                    <option value="">---Pilih Jenis Jabatan---</option>
+                                                    @foreach ($list_jabatan as $item)
+                                                        <option value="{{ $item->id }}">{{ $item->nama }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="pendidikan">Pendidikan Terakhir</label>
+                                                <select class="form-control" id="pendidikan" wire:model="pendidikan">
+                                                    <option value="">---Pilih Jenis Pendidikan Terakhir---
+                                                    </option>
+                                                    @foreach ($list_pendidikan as $item)
+                                                        <option value="{{ $item->id }}">
+                                                            {{ $item->pangkat }} - {{ $item->nama }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
                                     </div>
                                 @else
-                                    <div class="form-group">
-                                        <label for="alamat">Alamat</label>
-                                        <input type="text" class="form-control" placeholder="Masukkan alamat"
-                                            wire:model="alamat" />
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="nis">NIS</label>
+                                                <input type="nis" class="form-control" placeholder="Masukkan NIS"
+                                                    wire:model="nis" maxlength="10" />
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="nisn">NISN</label>
+                                                <input type="nisn" class="form-control"
+                                                    placeholder="Masukkan NISN" wire:model="nisn" maxlength="10" />
+                                            </div>
+                                        </div>
                                     </div>
+
                                 @endif
                             @endif
                             <div>
                                 @if ($stepper !== 1)
-                                    <button class="btn btn-primary mr-3" wire:click="decrement">Sebelumnya</button>
+                                    <button type="button" class="btn btn-primary mr-3"
+                                        wire:click="decrement">Sebelumnya</button>
                                 @endif
                                 @if ($stepper !== count($list_stepper))
-                                    <button class="btn btn-primary" wire:click="increment">Selanjutnya</button>
+                                    <button type="button" class="btn btn-primary"
+                                        wire:click="increment">Selanjutnya</button>
                                 @else
                                     <button class="btn btn-primary" wire:click="store">Submit</button>
                                 @endif
@@ -162,16 +239,6 @@
                     </div>
                 </div>
             </div>
-            {{-- <div class="progress" role="progressbar" aria-label="Animated striped example" aria-valuenow="0"
-                aria-valuemin="0" aria-valuemax="100">
-                <div class="progress-bar progress-bar-striped progress-bar-animated" style="width: 0%"></div>
-            </div> --}}
         </div>
     </section>
-    <script>
-        //Date picker
-        $('#reservationdate').datetimepicker({
-            format: 'L'
-        });
-    </script>
 </div>

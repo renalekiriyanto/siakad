@@ -20,7 +20,10 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             PangkatSeeder::class,
             GolonganSeeder::class,
-            PendidikanSeeder::class
+            PendidikanSeeder::class,
+            JabatanSeeder::class,
+            JurusanSeeder::class,
+            PekerjaanSeeder::class
         ]);
     }
 }
