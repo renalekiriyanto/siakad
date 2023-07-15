@@ -106,6 +106,9 @@
                 </div>
             </div>
         </section>
-
     </div>
+    <script>
+        var sessionData = JSON.parse(decodeURIComponent(laravelSession.replace(/\+/g, ' ')));
+        console.log(sessionData);
+    </script>
 @endsection

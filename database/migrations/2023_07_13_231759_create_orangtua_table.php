@@ -23,8 +23,6 @@ return new class extends Migration
             $table->foreignId('id_pekerjaan_ibu')->references('id')->on('pekerjaan');
             $table->string('nik_ayah', 16)->unique();
             $table->string('nik_ibu', 16)->unique();
-            $table->string('photo_ayah')->nullable();
-            $table->string('photo_ibu')->nullable();
             $table->timestamps();
         });
     }
@@ -36,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pekerjaan');
+        Schema::dropIfExists('orangtua');
     }
 };
