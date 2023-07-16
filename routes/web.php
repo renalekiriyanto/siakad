@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -30,5 +31,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::get('/', [UserController::class, 'index'])->name('user');
         Route::post('/{user}', [UserController::class, 'lock_user'])->name('lock_user');
         Route::get('tambah', [UserController::class, 'tambah'])->name('tambah_user');
+    });
+    Route::prefix('permission')->group(function () {
+        Route::get('/', [PermissionController::class, 'index'])->name('permission');
+        Route::get('edit/{user}', [PermissionController::class, 'edit'])->name('edit_permission_user');
     });
 });
