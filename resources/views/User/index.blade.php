@@ -34,6 +34,21 @@
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
+                                @if (session('status'))
+                                    <div id="session-message" class="alert alert-success alert-dismissible fade show"
+                                        role="alert">
+                                        <strong>Sukses!</strong> {{ session('status') }}.
+                                    </div>
+                                    <script>
+                                        // Menghilangkan pesan session secara otomatis setelah 3 detik
+                                        setTimeout(function() {
+                                            var sessionMessage = document.getElementById('session-message');
+                                            if (sessionMessage) {
+                                                sessionMessage.remove();
+                                            }
+                                        }, 3000);
+                                    </script>
+                                @endif
                                 <table id="example2" class="table table-bordered table-hover">
                                     <thead>
                                         <tr>
@@ -108,8 +123,4 @@
             </div>
         </section>
     </div>
-    <script>
-        var sessionData = JSON.parse(decodeURIComponent(laravelSession.replace(/\+/g, ' ')));
-        console.log(sessionData);
-    </script>
 @endsection

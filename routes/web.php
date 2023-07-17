@@ -31,10 +31,11 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::get('/', [UserController::class, 'index'])->name('user');
         Route::post('/{user}', [UserController::class, 'lock_user'])->name('lock_user');
         Route::get('tambah', [UserController::class, 'tambah'])->name('tambah_user');
-        Route::get('edit/{user}', [UserController::class, 'edit'])->name('edit_user');
+        Route::get('edit/{id}', [UserController::class, 'edit'])->name('edit_user');
+        Route::put('edit/{id}', [UserController::class, 'update'])->name('update_user');
     });
     Route::prefix('permission')->group(function () {
         Route::get('/', [PermissionController::class, 'index'])->name('permission');
-        Route::get('edit/{user}', [PermissionController::class, 'edit'])->name('edit_permission_user');
+        Route::get('edit/{id}', [PermissionController::class, 'edit'])->name('edit_permission_user');
     });
 });

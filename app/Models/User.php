@@ -49,4 +49,15 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Role::class);
     }
+
+    public function table_detail()
+    {
+        if ($this->role->id == 2) {
+            return $this->hasOne(Guru::class, 'id_user', 'id');
+        } else if ($this->role->id == 3) {
+            return $this->hasOne(Siswa::class, 'id_user', 'id');
+        } else {
+            return 'Admin';
+        }
+    }
 }
