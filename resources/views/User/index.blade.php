@@ -53,7 +53,8 @@
                                                 <td>{{ $item->email }}</td>
                                                 <td>{{ $item->profile->alamat }}</td>
                                                 <td>
-                                                    <button class="btn btn-block btn-success btn-sm">Edit</button>
+                                                    <a href="{{ route('edit_user', $item->id) }}"
+                                                        class="btn btn-block btn-success btn-sm">Edit</a>
                                                     <button type="submit"
                                                         class="btn btn-block btn-{{ $item->is_verified ? 'danger' : 'primary' }} btn-sm"
                                                         data-toggle="modal"

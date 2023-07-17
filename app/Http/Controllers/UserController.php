@@ -36,6 +36,14 @@ class UserController extends Controller
         return view('User.tambah', compact('user'));
     }
 
+    public function edit($user)
+    {
+        $user = Auth::user();
+        $userSelect = User::find($user);
+        $list_role = Role::all();
+        return view('User.edit', compact('user', 'userSelect', 'list_role'));
+    }
+
     public function lock_user(Request $request, User $user)
     {
         $request->validate([

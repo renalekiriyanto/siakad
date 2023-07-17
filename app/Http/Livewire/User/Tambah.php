@@ -241,7 +241,8 @@ class Tambah extends Component
         $role = Role::find($this->role);
         $user->assignRole($role->name);
 
-        $photo = $this->photo->store('profiles');
+        // $photo = $this->photo->store('img/profile');
+        $photo = $this->photo->storePublicly('profile', 'public');
 
         $profile = Profile::create([
             'user_id' => $user->id,
