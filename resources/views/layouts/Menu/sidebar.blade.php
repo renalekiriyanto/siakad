@@ -12,7 +12,7 @@
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-                <img src="{{ asset($user->profile->photo) ?? asset('storage/' . $user->profile->photo) }}"
+                <img src="{{ asset(Auth::user()->profile->photo) ?? asset('storage/' . Auth::user()->profile->photo) }}"
                     class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
@@ -31,11 +31,11 @@
                 </div>
             </div>
         </div>
-        @if ($user->hasRole('admin'))
-            <!-- Sidebar Menu -->
-            <nav class="mt-2">
-                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
-                    data-accordion="false">
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                data-accordion="false">
+                @if (Auth::user()->hasRole('admin'))
                     <li class="nav-item menu">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-user"></i>
@@ -60,15 +60,15 @@
                             </li>
                         </ul>
                     </li>
-                </ul>
-            </nav>
-            <!-- /.sidebar-menu -->
-            <form action="{{ route('logout') }}" method="post">
-                @csrf
-                <button type="submit" class="btn btn-block btn-danger text-white"><i
-                        class="nav-icon fa-right-from-bracket"></i>Logout</button>
-            </form>
-        @endif
+                @endif
+            </ul>
+        </nav>
+        <!-- /.sidebar-menu -->
+        <form action="{{ route('logout') }}" method="post">
+            @csrf
+            <button type="submit" class="btn btn-block btn-danger text-white"><i
+                    class="nav-icon fa-right-from-bracket"></i>Logout</button>
+        </form>
     </div>
     <!-- /.sidebar -->
 </aside>

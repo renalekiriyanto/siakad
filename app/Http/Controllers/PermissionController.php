@@ -21,4 +21,9 @@ class PermissionController extends Controller
         $list_permission = Permission::all();
         return view('permission.edit', compact('list_permission', 'user'));
     }
+
+    public function update(Request $request, User $user)
+    {
+        dd($request->all());
+    }
 }

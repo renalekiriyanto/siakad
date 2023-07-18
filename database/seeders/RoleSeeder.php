@@ -43,7 +43,31 @@ class RoleSeeder extends Seeder
             ],
             [
                 'name' => 'edit user'
-            ]
+            ],
+            [
+                'name' => 'tambah jadwal'
+            ],
+            [
+                'name' => 'list jadwal'
+            ],
+            [
+                'name' => 'edit jadwal'
+            ],
+            [
+                'name' => 'hapus jadwal'
+            ],
+            [
+                'name' => 'tambah profile'
+            ],
+            [
+                'name' => 'show profile'
+            ],
+            [
+                'name' => 'edit profile'
+            ],
+            [
+                'name' => 'hapus profile'
+            ],
         ];
 
         foreach ($data_permissions as $item) {
@@ -52,8 +76,13 @@ class RoleSeeder extends Seeder
 
         foreach ($data as $item) {
             $role = Role::create($item);
+            $role->givePermissionTo(['tambah profile', 'show profile', 'edit profile']);
             if ($role->name == 'admin') {
-                $role->givePermissionTo(['list user', 'tambah user', 'hapus user', 'edit user']);
+                foreach ($data_permissions as $item) {
+                    $role->givePermissionTo($item['name']);
+                }
+            } else if ($role->name == 'guru') {
+                $role->givePermissionTo('list user');
             }
         }
     }

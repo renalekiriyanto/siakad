@@ -34,7 +34,21 @@
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
-
+                                <form action="{{ route('update_user', $user->id) }}" method="POST">
+                                    @csrf
+                                    <div class="form-group">
+                                        <label for="permission">Permission</label>
+                                        <select class="select2" multiple="multiple" data-placeholder="Pilih hak akses"
+                                            style="width: 100%;" id="permission" name="permission">
+                                            @foreach ($list_permission as $item)
+                                                <option value="{{ $item->name }}"
+                                                    @if ($user->hasPermissionTo($item->name)) selected @endif>{{ $item->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Simpan</button>
+                                </form>
                             </div>
                         </div>
                     </div>
