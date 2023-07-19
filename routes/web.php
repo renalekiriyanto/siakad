@@ -33,10 +33,16 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::get('tambah', [UserController::class, 'tambah'])->name('tambah_user');
         Route::get('edit/{user}', [UserController::class, 'edit'])->name('edit_user');
         Route::post('edit/{user}', [UserController::class, 'update'])->name('update_user');
+        Route::prefix('permission')->group(function () {
+            Route::get('/', [PermissionController::class, 'index_user'])->name('permission_user');
+            Route::get('edit/{user}', [PermissionController::class, 'edit_user'])->name('edit_permission_user');
+            Route::post('edit/{user}', [PermissionController::class, 'update_user'])->name('update_permission_user');
+        });
     });
     Route::prefix('permission')->group(function () {
         Route::get('/', [PermissionController::class, 'index'])->name('permission');
-        Route::get('edit/{user}', [PermissionController::class, 'edit'])->name('edit_permission_user');
-        Route::post('edit/{user}', [PermissionController::class, 'update'])->name('update_permission_user');
+        Route::get('tambah', [PermissionController::class, 'tambah'])->name('tambah_permission');
+        Route::post('tambah', [PermissionController::class, 'store'])->name('tambah_permission');
+        Route::delete('/{permission}', [PermissionController::class, 'delete'])->name('delete_permission');
     });
 });

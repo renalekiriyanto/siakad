@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title', '| Daftar Permission')
+@section('title', '| Daftar User')
 @section('content')
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -8,12 +8,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Manage Permission</h1>
+                        <h1>Manage Permission User</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Permission</li>
+                            <li class="breadcrumb-item active">User</li>
                         </ol>
                     </div>
                 </div>
@@ -27,11 +27,10 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Management permissions</h3>
+                                <h3 class="card-title">Management permission users</h3>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
-                                <a href="{{ route('tambah_permission') }}" class="btn btn-primary btn-sm mb-3">Tambah</a>
                                 @if (session('success'))
                                     <div id="session-message" class="alert alert-success alert-dismissible fade show"
                                         role="alert">
@@ -47,50 +46,34 @@
                                         }, 3000);
                                     </script>
                                 @endif
-                                @if (session('warning'))
-                                    <div id="session-message" class="alert alert-warning alert-dismissible fade show"
-                                        role="alert">
-                                        <strong>Peringatan!</strong> {{ session('warning') }}
-                                    </div>
-                                    <script>
-                                        // Menghilangkan pesan session secara otomatis setelah 3 detik
-                                        setTimeout(function() {
-                                            var sessionMessage = document.getElementById('session-message');
-                                            if (sessionMessage) {
-                                                sessionMessage.remove();
-                                            }
-                                        }, 3000);
-                                    </script>
-                                @endif
                                 <table id="example2" class="table table-bordered table-hover">
                                     <thead>
                                         <tr>
                                             <th>Nama</th>
+                                            <th>Role</th>
+                                            <th>E-mail</th>
+                                            <th>Alamat</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($list_permission as $item)
-                                            <tr key={{ $item->id }}>
+                                        @foreach ($list_users as $item)
+                                            <tr key={{ $item->id }}
+                                                class="@if (!$item->is_verified) bg-warning @endif">
                                                 <td>{{ $item->name }}</td>
+                                                <td>{{ $item->role->full_name }}</td>
+                                                <td>{{ $item->email }}</td>
+                                                <td>{{ $item->profile->alamat }}</td>
                                                 <td>
-                                                    <div class="btn-group">
-                                                        <form action="{{ route('delete_permission', $item->id) }}"
-                                                            method="post">
-                                                            @csrf
-                                                            @method('delete')
-                                                            <a class="btn btn-danger btn-sm">
-                                                                <i class="fas fa-trash"></i>
-                                                            </a>
-                                                        </form>
-                                                    </div>
+                                                    <a href="{{ route('edit_permission_user', $item->id) }}"
+                                                        class="btn btn-block btn-success btn-sm">Edit</a>
                                                 </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
                                 <br>
-                                {{ $list_permission->links('pagination::bootstrap-5') }}
+                                {{ $list_users->links('pagination::bootstrap-5') }}
                             </div>
                         </div>
                     </div>

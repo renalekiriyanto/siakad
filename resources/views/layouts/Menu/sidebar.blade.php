@@ -53,6 +53,23 @@
                                 </a>
                             </li>
                             <li class="nav-item">
+                                <a href="{{ route('permission_user') }}" class="nav-link">
+                                    <i class="fas fa-layer-group nav-icon"></i>
+                                    <p>Permission</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item menu">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-user"></i>
+                            <p>
+                                Manajemen Permission
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
                                 <a href="{{ route('permission') }}" class="nav-link">
                                     <i class="fas fa-layer-group nav-icon"></i>
                                     <p>Permission</p>
