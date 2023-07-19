@@ -25,15 +25,27 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
-                        <div class="mb-3">
-                            <a href="" class="btn btn-primary">Tambah</a>
-                        </div>
                         <div class="card">
                             <div class="card-header">
                                 <h3 class="card-title">Management permission users</h3>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
+                                @if (session('success'))
+                                    <div id="session-message" class="alert alert-success alert-dismissible fade show"
+                                        role="alert">
+                                        <strong>Sukses!</strong> {{ session('success') }}
+                                    </div>
+                                    <script>
+                                        // Menghilangkan pesan session secara otomatis setelah 3 detik
+                                        setTimeout(function() {
+                                            var sessionMessage = document.getElementById('session-message');
+                                            if (sessionMessage) {
+                                                sessionMessage.remove();
+                                            }
+                                        }, 3000);
+                                    </script>
+                                @endif
                                 <table id="example2" class="table table-bordered table-hover">
                                     <thead>
                                         <tr>

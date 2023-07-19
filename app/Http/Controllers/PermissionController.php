@@ -24,6 +24,8 @@ class PermissionController extends Controller
 
     public function update(Request $request, User $user)
     {
-        dd($request->all());
+        $user->syncPermissions($request->permission);
+
+        return redirect()->route('permission')->with('success', 'Berhasil update permission.');
     }
 }
