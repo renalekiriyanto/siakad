@@ -38,31 +38,58 @@
                 @if (Auth::user()->hasRole('admin'))
                     <li class="nav-item menu">
                         <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-user"></i>
+                            <i class="nav-icon fas fa-th-list"></i>
                             <p>
-                                Manajemen User
+                                Mata Pelajaran
                                 <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="{{ route('user') }}"
-                                    class="nav-link @if (\Request::route()->getName() == 'user') active @endif">
-                                    <i class="fas fa-user nav-icon"></i>
-                                    <p>User</p>
+                                <a href="{{ route('mapel') }}" class="nav-link">
+                                    <i class="fas fa-table nav-icon"></i>
+                                    <p>Mata Pelajaran</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ route('permission_user') }}" class="nav-link">
-                                    <i class="fas fa-layer-group nav-icon"></i>
-                                    <p>Permission</p>
+                                <a href="{{ route('permission') }}" class="nav-link">
+                                    <i class="fas fa-calendar nav-icon"></i>
+                                    <p>Jadwal</p>
                                 </a>
                             </li>
                         </ul>
                     </li>
+                    @canany(['list user', 'tambah user', 'edit user', 'delete user', 'assign permission'])
+                        <li class="nav-item menu">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-user"></i>
+                                <p>
+                                    Manajemen User
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{ route('user') }}"
+                                        class="nav-link @if (\Request::route()->getName() == 'user') active @endif">
+                                        <i class="fas fa-user nav-icon"></i>
+                                        <p>User</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('permission_user') }}" class="nav-link">
+                                        <i class="fas fa-user-cog nav-icon"></i>
+                                        <p>Permission</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    @endcanany
+
+
                     <li class="nav-item menu">
                         <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-user"></i>
+                            <i class="nav-icon fas fa-universal-access"></i>
                             <p>
                                 Manajemen Permission
                                 <i class="right fas fa-angle-left"></i>

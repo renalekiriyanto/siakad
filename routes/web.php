@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\MatapelajaranController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
@@ -44,5 +45,14 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::get('tambah', [PermissionController::class, 'tambah'])->name('tambah_permission');
         Route::post('tambah', [PermissionController::class, 'store'])->name('tambah_permission');
         Route::delete('/{permission}', [PermissionController::class, 'delete'])->name('delete_permission');
+    });
+    Route::prefix('mapel')->group(function () {
+        Route::get('/', [MatapelajaranController::class, 'index'])->name('mapel');
+        Route::get('tambah', [MatapelajaranController::class, 'create'])->name('mapel.tambah');
+        Route::post('tambah', [MatapelajaranController::class, 'store'])->name('mapel.store');
+        Route::get('edit/{mapel}', [MatapelajaranController::class, 'edit'])->name('mapel.edit');
+        Route::put('edit/{mapel}', [MatapelajaranController::class, 'update'])->name('mapel.update');
+        Route::delete('delete/{mapel}', [MatapelajaranController::class, 'destroy'])->name('mapel.delete');
+        Route::get('show/{mapel}', [MatapelajaranController::class, 'show'])->name('mapel.show');
     });
 });

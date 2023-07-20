@@ -30,7 +30,8 @@ class PermissionController extends Controller
         }
 
         $permission = Permission::create([
-            'name' => $request->name
+            'name' => $request->name,
+            'guard_name' => 'web'
         ]);
 
         return redirect()->route('permission')->with('success', 'Berhasil tambah permission.');
@@ -60,6 +61,6 @@ class PermissionController extends Controller
     {
         $user->syncPermissions($request->permission);
 
-        return redirect()->route('permission')->with('success', 'Berhasil update permission.');
+        return redirect()->route('permission_user')->with('success', 'Berhasil update permission.');
     }
 }

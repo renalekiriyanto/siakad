@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title', '| Daftar Permission')
+@section('title', '| Daftar Mata Pelajaran')
 @section('content')
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -8,12 +8,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Manage Permission</h1>
+                        <h1>Manage Mata Pelajaran</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Permission</li>
+                            <li class="breadcrumb-item active">Mata Pelajaran</li>
                         </ol>
                     </div>
                 </div>
@@ -27,11 +27,11 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Management permissions</h3>
+                                <h3 class="card-title">Management mata pelajaran</h3>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
-                                <a href="{{ route('tambah_permission') }}" class="btn btn-primary btn-sm mb-3">Tambah</a>
+                                <a href="{{ route('mapel.tambah') }}" class="btn btn-primary btn-sm mb-3">Tambah</a>
                                 @if (session('success'))
                                     <div id="session-message" class="alert alert-success alert-dismissible fade show"
                                         role="alert">
@@ -62,6 +62,21 @@
                                         }, 3000);
                                     </script>
                                 @endif
+                                @if (session('error'))
+                                    <div id="session-message" class="alert alert-danger alert-dismissible fade show"
+                                        role="alert">
+                                        <strong>Peringatan!</strong> {{ session('error') }}
+                                    </div>
+                                    <script>
+                                        // Menghilangkan pesan session secara otomatis setelah 3 detik
+                                        setTimeout(function() {
+                                            var sessionMessage = document.getElementById('session-message');
+                                            if (sessionMessage) {
+                                                sessionMessage.remove();
+                                            }
+                                        }, 3000);
+                                    </script>
+                                @endif
                                 <table id="example2" class="table table-bordered table-hover">
                                     <thead>
                                         <tr>
@@ -70,27 +85,30 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($list_permission as $item)
+                                        @foreach ($list_mapel as $item)
                                             <tr key={{ $item->id }}>
-                                                <td>{{ $item->name }}</td>
-                                                <td>
-                                                    <div class="btn-group">
-                                                        <form action="{{ route('delete_permission', $item->id) }}"
-                                                            method="post">
-                                                            @csrf
-                                                            @method('delete')
-                                                            <button type="submit" class="btn btn-danger btn-sm">
-                                                                <i class="fas fa-trash"></i>
-                                                            </button>
-                                                        </form>
-                                                    </div>
+                                                <td>{{ $item->nama }}</td>
+                                                <td class="d-flex align-content-between">
+                                                    <a href="{{ route('mapel.edit', $item->id) }}" class="btn btn-success">
+                                                        <i class="fas fa-pen"></i>
+                                                    </a>
+                                                    <a href="{{ route('mapel.show', $item->id) }}" class="btn btn-primary">
+                                                        <i class="fas fa-eye"></i>
+                                                    </a>
+                                                    <form action="{{ route('mapel.delete', $item->id) }}" method="post">
+                                                        @csrf
+                                                        @method('delete')
+                                                        <button type="submit" class="btn btn-danger">
+                                                            <i class="fas fa-trash"></i>
+                                                        </button>
+                                                    </form>
                                                 </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
                                 <br>
-                                {{ $list_permission->links('pagination::bootstrap-5') }}
+                                {{ $list_mapel->links('pagination::bootstrap-5') }}
                             </div>
                         </div>
                     </div>
