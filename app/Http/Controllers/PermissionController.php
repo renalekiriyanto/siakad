@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Schema;
 use Spatie\Permission\Models\Permission;
 
 class PermissionController extends Controller
@@ -18,21 +19,53 @@ class PermissionController extends Controller
 
     public function tambah()
     {
-        return view('permission.tambah');
+        $tables = Schema::getAllTables();
+        return view('permission.tambah', compact('tables'));
     }
 
     public function store(Request $request)
     {
-        $permission = Permission::where('name', $request->name)->first();
+        if ($request->crud) {
+            $crud = [
+                [
+                    'name' => 'list ' . $request->name
+                ],
+                [
+                    'name' => 'detail ' . $request->name
+                ],
+                [
+                    'name' => 'tambah ' . $request->name
+                ],
+                [
+                    'name' => 'edit ' . $request->name
+                ],
+                [
+                    'name' => 'delete ' . $request->name
+                ]
+            ];
+            foreach ($crud as $item) {
+                $permission = Permission::where('name', $request->name)->first();
+                if ($permission) {
+                    return redirect()->route('permission')->with('warning', 'Permission sudah ada.');
+                }
 
-        if ($permission) {
-            return redirect()->route('permission')->with('warning', 'Permission sudah ada.');
+                $permission = Permission::create([
+                    'name' => $item['name'],
+                    'guard_name' => 'web'
+                ]);
+            }
+        } else {
+            $permission = Permission::where('name', $request->name)->first();
+
+            if ($permission) {
+                return redirect()->route('permission')->with('warning', 'Permission sudah ada.');
+            }
+
+            $permission = Permission::create([
+                'name' => $request->name,
+                'guard_name' => 'web'
+            ]);
         }
-
-        $permission = Permission::create([
-            'name' => $request->name,
-            'guard_name' => 'web'
-        ]);
 
         return redirect()->route('permission')->with('success', 'Berhasil tambah permission.');
     }

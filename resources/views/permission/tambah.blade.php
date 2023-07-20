@@ -41,6 +41,10 @@
                                         @error('name')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
+                                        <div>
+                                            <input type="checkbox" name="crud" id="crud">
+                                            <label for="crud">CRUD</label>
+                                        </div>
                                     </div>
                                     <button class="btn btn-primary">Simpan</button>
                                 </form>

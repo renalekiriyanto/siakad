@@ -46,7 +46,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::post('tambah', [PermissionController::class, 'store'])->name('tambah_permission');
         Route::delete('/{permission}', [PermissionController::class, 'delete'])->name('delete_permission');
     });
-    Route::prefix('mapel')->group(function () {
+    Route::prefix('mapel')->middleware(['permission:list mapel|tambah mapel|edit mapel|detail mapel|delete mapel'])->group(function () {
         Route::get('/', [MatapelajaranController::class, 'index'])->name('mapel');
         Route::get('tambah', [MatapelajaranController::class, 'create'])->name('mapel.tambah');
         Route::post('tambah', [MatapelajaranController::class, 'store'])->name('mapel.store');
