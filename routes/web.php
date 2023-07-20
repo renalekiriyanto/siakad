@@ -55,4 +55,13 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::delete('delete/{mapel}', [MatapelajaranController::class, 'destroy'])->name('mapel.delete');
         Route::get('show/{mapel}', [MatapelajaranController::class, 'show'])->name('mapel.show');
     });
+    Route::prefix('kelas')->middleware(['permission:list kelas|tambah kelas|edit kelas|detail kelas|delete kelas'])->group(function () {
+        Route::get('/', [MatapelajaranController::class, 'index'])->name('kelas');
+        Route::get('tambah', [MatapelajaranController::class, 'create'])->name('kelas.tambah');
+        Route::post('tambah', [MatapelajaranController::class, 'store'])->name('kelas.store');
+        Route::get('edit/{kelas}', [MatapelajaranController::class, 'edit'])->name('kelas.edit');
+        Route::put('edit/{kelas}', [MatapelajaranController::class, 'update'])->name('kelas.update');
+        Route::delete('delete/{kelas}', [MatapelajaranController::class, 'destroy'])->name('kelas.delete');
+        Route::get('show/{kelas}', [MatapelajaranController::class, 'show'])->name('kelas.show');
+    });
 });
