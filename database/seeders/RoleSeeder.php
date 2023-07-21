@@ -45,18 +45,6 @@ class RoleSeeder extends Seeder
                 'name' => 'edit user'
             ],
             [
-                'name' => 'tambah jadwal'
-            ],
-            [
-                'name' => 'list jadwal'
-            ],
-            [
-                'name' => 'edit jadwal'
-            ],
-            [
-                'name' => 'hapus jadwal'
-            ],
-            [
                 'name' => 'tambah profile'
             ],
             [

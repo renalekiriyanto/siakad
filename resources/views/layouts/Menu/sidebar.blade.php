@@ -37,6 +37,14 @@
                 data-accordion="false">
                 @if (Auth::user()->hasRole('admin'))
                     <li class="nav-item menu">
+                        <a href="{{ route('kelas') }}" class="nav-link">
+                            <i class="nav-icon fas fa-door-open"></i>
+                            <p>
+                                Kelas
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item menu">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-th-list"></i>
                             <p>
@@ -52,7 +60,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ route('permission') }}" class="nav-link">
+                                <a href="{{ route('jadwalmapel') }}" class="nav-link">
                                     <i class="fas fa-calendar nav-icon"></i>
                                     <p>Jadwal</p>
                                 </a>

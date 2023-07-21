@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title', '| Daftar Kelas')
+@section('title', '| Daftar Jadwal Mata Pelajaran')
 @section('content')
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -8,12 +8,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Manage Kelas</h1>
+                        <h1>Manage Jadwal Mata Pelajaran</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Kelas</li>
+                            <li class="breadcrumb-item active">Jadwal Mata Pelajaran</li>
                         </ol>
                     </div>
                 </div>
@@ -27,11 +27,11 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Management kelas</h3>
+                                <h3 class="card-title">Management Jadwal Mata Pelajaran</h3>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
-                                <a href="{{ route('kelas.tambah') }}" class="btn btn-primary btn-sm mb-3">Tambah</a>
+                                <a href="{{ route('jadwalmapel.tambah') }}" class="btn btn-primary btn-sm mb-3">Tambah</a>
                                 @if (session('success'))
                                     <div id="session-message" class="alert alert-success alert-dismissible fade show"
                                         role="alert">
@@ -80,13 +80,16 @@
                                 <table id="example2" class="table table-bordered table-hover">
                                     <thead>
                                         <tr>
-                                            <th>Nama</th>
+                                            <th>Mata Pelajaran</th>
+                                            <th>Hari</th>
+                                            <th>Jam Mulai</th>
+                                            <th>Jam Berakhir</th>
                                             <th>Tahun Ajaran</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($list_kelas as $item)
+                                        @foreach ($list_jadwal as $item)
                                             <tr key={{ $item->id }}>
                                                 <td>{{ $item->nama }}</td>
                                                 <td>{{ $item->tahun_ajaran }}</td>
@@ -110,7 +113,7 @@
                                     </tbody>
                                 </table>
                                 <br>
-                                {{ $list_kelas->links('pagination::bootstrap-5') }}
+                                {{ $list_jadwal->links('pagination::bootstrap-5') }}
                             </div>
                         </div>
                     </div>

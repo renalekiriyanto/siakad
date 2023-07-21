@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\JadwalMapelController;
+use App\Http\Controllers\KelasController;
 use App\Http\Controllers\MatapelajaranController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\UserController;
@@ -55,13 +57,31 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::delete('delete/{mapel}', [MatapelajaranController::class, 'destroy'])->name('mapel.delete');
         Route::get('show/{mapel}', [MatapelajaranController::class, 'show'])->name('mapel.show');
     });
+    Route::prefix('mapel')->middleware(['permission:list mapel|tambah mapel|edit mapel|detail mapel|delete mapel'])->group(function () {
+        Route::get('/', [MatapelajaranController::class, 'index'])->name('mapel');
+        Route::get('tambah', [MatapelajaranController::class, 'create'])->name('mapel.tambah');
+        Route::post('tambah', [MatapelajaranController::class, 'store'])->name('mapel.store');
+        Route::get('edit/{mapel}', [MatapelajaranController::class, 'edit'])->name('mapel.edit');
+        Route::put('edit/{mapel}', [MatapelajaranController::class, 'update'])->name('mapel.update');
+        Route::delete('delete/{mapel}', [MatapelajaranController::class, 'destroy'])->name('mapel.delete');
+        Route::get('show/{mapel}', [MatapelajaranController::class, 'show'])->name('mapel.show');
+    });
     Route::prefix('kelas')->middleware(['permission:list kelas|tambah kelas|edit kelas|detail kelas|delete kelas'])->group(function () {
-        Route::get('/', [MatapelajaranController::class, 'index'])->name('kelas');
-        Route::get('tambah', [MatapelajaranController::class, 'create'])->name('kelas.tambah');
-        Route::post('tambah', [MatapelajaranController::class, 'store'])->name('kelas.store');
-        Route::get('edit/{kelas}', [MatapelajaranController::class, 'edit'])->name('kelas.edit');
-        Route::put('edit/{kelas}', [MatapelajaranController::class, 'update'])->name('kelas.update');
-        Route::delete('delete/{kelas}', [MatapelajaranController::class, 'destroy'])->name('kelas.delete');
-        Route::get('show/{kelas}', [MatapelajaranController::class, 'show'])->name('kelas.show');
+        Route::get('/', [KelasController::class, 'index'])->name('kelas');
+        Route::get('tambah', [KelasController::class, 'create'])->name('kelas.tambah');
+        Route::post('tambah', [KelasController::class, 'store'])->name('kelas.store');
+        Route::get('edit/{kelas}', [KelasController::class, 'edit'])->name('kelas.edit');
+        Route::put('edit/{kelas}', [KelasController::class, 'update'])->name('kelas.update');
+        Route::delete('delete/{kelas}', [KelasController::class, 'destroy'])->name('kelas.delete');
+        Route::get('show/{kelas}', [KelasController::class, 'show'])->name('kelas.show');
+    });
+    Route::prefix('jadwalmapel')->middleware(['permission:list jadwal mapel|tambah jadwal mapel|edit jadwal mapel|detail jadwal mapel|delete jadwal mapel'])->group(function () {
+        Route::get('/', [JadwalMapelController::class, 'index'])->name('jadwalmapel');
+        Route::get('tambah', [JadwalMapelController::class, 'create'])->name('jadwalmapel.tambah');
+        Route::post('tambah', [JadwalMapelController::class, 'store'])->name('jadwalmapel.store');
+        Route::get('edit/{jadwalmapel}', [JadwalMapelController::class, 'edit'])->name('jadwalmapel.edit');
+        Route::put('edit/{jadwalmapel}', [JadwalMapelController::class, 'update'])->name('jadwalmapel.update');
+        Route::delete('delete/{jadwalmapel}', [JadwalMapelController::class, 'destroy'])->name('jadwalmapel.delete');
+        Route::get('show/{jadwalmapel}', [JadwalMapelController::class, 'show'])->name('jadwalmapel.show');
     });
 });
