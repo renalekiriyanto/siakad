@@ -16,9 +16,10 @@ return new class extends Migration
         Schema::create('siswa', function (Blueprint $table) {
             $table->id();
             $table->foreignId('id_user')->references('id')->on('users')->onDelete('cascade');
+            $table->foreignId('id_orangtua')->references('id')->on('orangtua')->onDelete('cascade');
+            $table->foreignId('id_kelas')->references('id')->on('kelas');
             $table->string('nis', 10);
             $table->string('nisn', 10)->nullable();
-            $table->foreignId('id_orangtua')->references('id')->on('orangtua')->onDelete('cascade');
             $table->timestamps();
         });
     }

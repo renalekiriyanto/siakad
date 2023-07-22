@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('kelas', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('id_walikelas')->references('id')->on('guru');
             $table->string('nama');
             $table->string('tahun_ajaran');
             $table->timestamps();
