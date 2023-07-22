@@ -62,4 +62,9 @@ class KelasController extends Controller
         $kelas->delete();
         return redirect()->route('kelas')->with('success', 'Data berhasil dihapus.');
     }
+
+    public function api_getdetail(Kelas $kelas)
+    {
+        return response()->json($kelas);
+    }
 }

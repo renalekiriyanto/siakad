@@ -1,4 +1,6 @@
 <!-- REQUIRED SCRIPTS -->
+{{-- axios --}}
+<script src="{{ asset('js/axios.min.js') }}"></script>
 <!-- jQuery -->
 <script src="{{ asset('plugins/jquery/jquery.js') }}"></script>
 <!-- Bootstrap -->
@@ -49,6 +51,9 @@
 <script src="{{ asset('plugins/dropzone/min/dropzone.min.js') }}"></script>
 <!-- Toastr -->
 <script src="{{ asset('plugins/toastr/toastr.min.js') }}"></script>
+{{-- Clock picker --}}
+<script src="{{ asset('js/bootstrap-clockpicker.js') }}"></script>
+
 <script>
     // BS-Stepper Init
     document.addEventListener('DOMContentLoaded', function() {
@@ -65,5 +70,7 @@
             time: 'far fa-clock'
         }
     });
+
+    $('.clockpicker').clockpicker()
     // })
 </script>

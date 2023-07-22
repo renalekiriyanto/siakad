@@ -27,5 +27,8 @@
         href="{{ asset('plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') }}">
     <!-- iCheck for checkboxes and radio inputs -->
     <link rel="stylesheet" href="{{ asset('plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
+    {{-- Clock picker style --}}
+    <link rel="stylesheet" href="{{ asset('css/bootstrap-clockpicker.css') }}">
+
     @livewireStyles
 </header>

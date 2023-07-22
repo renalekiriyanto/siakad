@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kelas;
 use App\Models\Mapel;
 use Illuminate\Http\Request;
 
@@ -59,5 +60,10 @@ class MatapelajaranController extends Controller
     {
         $mapel->delete();
         return redirect()->route('mapel')->with('success', 'Data berhasil dihapus.');
+    }
+
+    public function api_getdetail(Mapel $mapel)
+    {
+        return response()->json($mapel);
     }
 }

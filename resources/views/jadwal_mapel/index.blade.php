@@ -84,6 +84,7 @@
                                             <th>Hari</th>
                                             <th>Jam Mulai</th>
                                             <th>Jam Berakhir</th>
+                                            <th>Kelas</th>
                                             <th>Tahun Ajaran</th>
                                             <th>Aksi</th>
                                         </tr>
@@ -91,16 +92,23 @@
                                     <tbody>
                                         @foreach ($list_jadwal as $item)
                                             <tr key={{ $item->id }}>
-                                                <td>{{ $item->nama }}</td>
-                                                <td>{{ $item->tahun_ajaran }}</td>
+                                                <td>{{ $item->mapel->nama }}</td>
+                                                <td>{{ $item->hari }}</td>
+                                                <td>{{ $item->jam_mulai }}</td>
+                                                <td>{{ $item->jam_berakhir }}</td>
+                                                <td>{{ $item->kelas->nama }}</td>
+                                                <td>{{ $item->kelas->tahun_ajaran }}</td>
                                                 <td class="d-flex align-content-between">
-                                                    <a href="{{ route('kelas.edit', $item->id) }}" class="btn btn-success">
+                                                    <a href="{{ route('jadwalmapel.edit', $item->id) }}"
+                                                        class="btn btn-success">
                                                         <i class="fas fa-pen"></i>
                                                     </a>
-                                                    <a href="{{ route('kelas.show', $item->id) }}" class="btn btn-primary">
+                                                    <a href="{{ route('jadwalmapel.show', $item->id) }}"
+                                                        class="btn btn-primary">
                                                         <i class="fas fa-eye"></i>
                                                     </a>
-                                                    <form action="{{ route('kelas.delete', $item->id) }}" method="post">
+                                                    <form action="{{ route('jadwalmapel.delete', $item->id) }}"
+                                                        method="post">
                                                         @csrf
                                                         @method('delete')
                                                         <button type="submit" class="btn btn-danger">

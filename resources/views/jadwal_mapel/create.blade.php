@@ -44,9 +44,10 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="mapel">Mata Pelajaran</label>
-                                        <div class="input-group">
+                                        <div class="input-group mb-3">
                                             <input type="text" class="form-control form-control"
-                                                placeholder="Mata Pelajaran">
+                                                placeholder="Mata Pelajaran" id="mapel" name="mapel" readonly>
+                                            <input type="hidden" name="id_mapel" id="id_mapel">
                                             <div class="input-group-append">
                                                 <button type="button" data-toggle="modal" data-target="#modal-mapel"
                                                     class="btn btn-default">
@@ -54,11 +55,28 @@
                                                 </button>
                                             </div>
                                         </div>
+                                        <div class="row" id="card_mapel">
+                                            <div class="col-sm-6">
+                                                <div class="card">
+                                                    <table class="table table-borderless">
+                                                        <tr>
+                                                            <td>Nama Mata Pelajaran</td>
+                                                            <td>:</td>
+                                                            <td>
+                                                                <span id="span_mapel"></span>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="mapel">Kelas</label>
-                                        <div class="input-group">
-                                            <input type="text" class="form-control form-control" placeholder="Kelas">
+                                        <label for="kelas">Kelas</label>
+                                        <div class="input-group mb-3">
+                                            <input type="text" class="form-control form-control" placeholder="Kelas"
+                                                id="kelas" name="kelas" readonly>
+                                            <input type="hidden" name="id_kelas" id="id_kelas">
                                             <div class="input-group-append">
                                                 <button type="button" data-toggle="modal" data-target="#modal-kelas"
                                                     class="btn btn-default">
@@ -66,8 +84,57 @@
                                                 </button>
                                             </div>
                                         </div>
+                                        <div class="row" id="card_kelas">
+                                            <div class="col-sm-6">
+                                                <div class="card">
+                                                    <table class="table table-borderless">
+                                                        <tr>
+                                                            <td>Kelas</td>
+                                                            <td>:</td>
+                                                            <td>
+                                                                <span id="nama_kelas"></span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Tahun Ajaran</td>
+                                                            <td>:</td>
+                                                            <td>
+                                                                <span id="tahun_ajaran"></span>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <button class="btn btn-primary">Simpan</button>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="">Jam Mulai</label>
+                                                <div class="input-group clockpicker">
+                                                    <input type="text" class="form-control" value="09:30" id="jam_mulai"
+                                                        name="jam_mulai">
+                                                    <span class="input-group-addon">
+                                                        <span class="glyphicon glyphicon-time"></span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="">Jam Berakhir</label>
+                                                <div class="input-group clockpicker">
+                                                    <input type="text" class="form-control" value="09:30"
+                                                        id="jam_berakhir" name="jam_berakhir">
+                                                    <span class="input-group-addon">
+                                                        <span class="glyphicon glyphicon-time"></span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <button type="submit" class="btn btn-primary">Simpan</button>
                                 </form>
                             </div>
                         </div>
@@ -80,7 +147,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Kelas</h4>
+                    <h4 class="modal-title">Mata Pelajaran</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -93,32 +160,16 @@
                         <thead>
                             <tr>
                                 <th>Mata Pelajaran</th>
-                                <th>Hari</th>
-                                <th>Jam Mulai</th>
-                                <th>Jam Berakhir</th>
-                                <th>Tahun Ajaran</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($list_jadwal as $item)
+                            @foreach ($list_mapel as $item)
                                 <tr key={{ $item->id }}>
                                     <td>{{ $item->nama }}</td>
-                                    <td>{{ $item->tahun_ajaran }}</td>
                                     <td class="d-flex align-content-between">
-                                        <a href="{{ route('kelas.edit', $item->id) }}" class="btn btn-success">
-                                            <i class="fas fa-pen"></i>
-                                        </a>
-                                        <a href="{{ route('kelas.show', $item->id) }}" class="btn btn-primary">
-                                            <i class="fas fa-eye"></i>
-                                        </a>
-                                        <form action="{{ route('kelas.delete', $item->id) }}" method="post">
-                                            @csrf
-                                            @method('delete')
-                                            <button type="submit" class="btn btn-danger">
-                                                <i class="fas fa-trash"></i>
-                                            </button>
-                                        </form>
+                                        <button class="btn btn-primary btn-sm" onclick="pilihMapel({{ $item->id }})"
+                                            data-dismiss="modal">Pilih</button>
                                     </td>
                                 </tr>
                             @endforeach
@@ -144,7 +195,27 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>One fine body&hellip;</p>
+                    <table id="table_" class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>Kelas</th>
+                                <th>Tahun Ajaran</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($list_kelas as $item)
+                                <tr key={{ $item->id }}>
+                                    <td>{{ $item->nama }}</td>
+                                    <td>{{ $item->tahun_ajaran }}</td>
+                                    <td class="d-flex align-content-between">
+                                        <button class="btn btn-primary btn-sm" onclick="pilihKelas({{ $item->id }})"
+                                            data-dismiss="modal">Pilih</button>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
                 <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -155,4 +226,49 @@
         <!-- /.modal-dialog -->
     </div>
     <!-- /.modal -->
+    <script>
+        // Mapel
+        let mapel = document.getElementById('mapel');
+        let card_mapel = document.getElementById('card_mapel');
+        let span_mapel = document.getElementById('span_mapel');
+        let id_mapel = document.getElementById('id_mapel');
+        // Kelas
+        let kelas = document.getElementById('kelas');
+        let card_kelas = document.getElementById('card_kelas');
+        let nama_kelas = document.getElementById('nama_kelas');
+        let tahun_ajaran = document.getElementById('tahun_ajaran');
+        let id_kelas = document.getElementById('id_kelas');
+
+        card_mapel.style.display = "none";
+        card_kelas.style.display = "none";
+
+        const pilihMapel = async (id) => {
+            const res = await axios.get(`/api/getmapel/${id}`);
+            mapel.value = res.data.nama;
+            if (mapel.value) {
+                card_mapel.style.display = "block";
+                span_mapel.innerHTML = res.data.nama;
+                id_mapel.value = res.data.id;
+            } else {
+                card_mapel.style.display = "none";
+                span_mapel.innerHTML = "";
+            }
+        }
+
+        const pilihKelas = async (id) => {
+            const res = await axios.get(`/api/getkelas/${id}`);
+            kelas.value = res.data.nama
+            console.log(res.data);
+            if (kelas.value) {
+                card_kelas.style.display = "block";
+                nama_kelas.innerHTML = res.data.nama;
+                tahun_ajaran.innerHTML = res.data.tahun_ajaran;
+                id_kelas.value = res.data.id;
+            } else {
+                card_kelas.style.display = "none";
+                nama_kelas.innerHTML = "";
+                tahun_ajaran.innerHTML = "";
+            }
+        }
+    </script>
 @endsection

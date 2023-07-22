@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\JadwalMapel;
 use App\Models\Kelas;
+use App\Models\Mapel;
 use App\Rules\HariRule;
 use Illuminate\Http\Request;
 
@@ -22,7 +23,9 @@ class JadwalMapelController extends Controller
 
     public function create()
     {
-        return view('jadwal_mapel.create');
+        $list_kelas = Kelas::paginate(10);
+        $list_mapel = Mapel::paginate(10);
+        return view('jadwal_mapel.create', compact('list_kelas', 'list_mapel'));
     }
 
     public function store(Request $request)
@@ -47,7 +50,9 @@ class JadwalMapelController extends Controller
 
     public function edit(JadwalMapel $jadwalmapel)
     {
-        return view('jadwal_mapel.edit', compact('jadwalmapel'));
+        $list_kelas = Kelas::paginate(10);
+        $list_mapel = Mapel::paginate(10);
+        return view('jadwal_mapel.edit', compact('jadwalmapel', 'list_kelas', 'list_mapel'));
     }
 
     public function update(Request $request, JadwalMapel $jadwalmapel)
