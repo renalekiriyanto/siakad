@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Guru;
 use App\Models\Profile;
 use App\Models\User;
 use Carbon\Carbon;
@@ -47,32 +48,43 @@ class UserSeeder extends Seeder
 
         // Faker user
 
-        // $faker = Faker::create('id_ID');
-        // for ($i = 1; $i <= 50; $i++) {
-        //     $user = User::create([
-        //         'name' => $faker->name(),
-        //         'username' => $faker->userName(),
-        //         'email' => $faker->email(),
-        //         'password' => Hash::make('password'),
-        //         'role_id' => $faker->numberBetween(1, 3)
-        //     ]);
-        //     $role = Role::find($user->role_id)->first();
-        //     $user->assignRole($role->name);
-        //     if ($user->role_id === 1) {
-        //         $user->is_verified = true;
-        //         $user->save();
-        //     }
+        $faker = Faker::create('id_ID');
+        for ($i = 1; $i <= 50; $i++) {
+            $user = User::create([
+                'name' => $faker->name(),
+                'username' => $faker->userName(),
+                'email' => $faker->email(),
+                'password' => Hash::make('password'),
+                'role_id' => $faker->numberBetween(1, 3),
+                'is_verified' => true
+            ]);
+            $role = Role::find($user->role_id)->first();
+            $user->assignRole($role->name);
 
-        //     $profile = Profile::create([
-        //         'user_id' => $user->id,
-        //         'alamat' => $faker->address(),
-        //         'no_hp' => $faker->phoneNumber(),
-        //         'gender' => $faker->randomElement(['L', 'P']),
-        //         'tempat_lahir' => $faker->address(),
-        //         'tanggal_lahir' => $faker->date('Y_m_d'),
-        //         'agama' => $faker->randomElement(['Islam', 'Katolik', 'Protestan', 'Buddha', 'Hindu'], null),
-        //         'golongan_darah' => $faker->randomElement(['O+', 'A+', 'B+', 'AB+', 'O-', 'A-', 'B-', 'AB-'], null)
-        //     ]);
-        // }
+            $profile = Profile::create([
+                'user_id' => $user->id,
+                'alamat' => $faker->address(),
+                'no_hp' => $faker->phoneNumber(),
+                'gender' => $faker->randomElement(['L', 'P']),
+                'tempat_lahir' => $faker->address(),
+                'tanggal_lahir' => $faker->date('Y_m_d'),
+                'agama' => $faker->randomElement(['Islam', 'Katolik', 'Protestan', 'Buddha', 'Hindu'], null),
+                'golongan_darah' => $faker->randomElement(['O+', 'A+', 'B+', 'AB+', 'O-', 'A-', 'B-', 'AB-'], null)
+            ]);
+
+            if ($user->role_id == 2) {
+                Guru::create([
+                    'id_user' => $user->id,
+                    'nip' => $faker->numerify('##################'),
+                    'nuptk' => $faker->numerify('################'),
+                    'nrg' => $faker->numerify('############'),
+                    'id_pangkat' => $faker->numberBetween(1, 7),
+                    'id_golongan' => $faker->numberBetween(1, 17),
+                    'id_jabatan' => $faker->numberBetween(1, 6),
+                    'id_pendidikan' => $faker->numberBetween(1, 7),
+                    'nik' => $faker->numerify('################')
+                ]);
+            }
+        }
     }
 }

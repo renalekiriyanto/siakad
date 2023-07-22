@@ -112,4 +112,9 @@ class UserController extends Controller
             return redirect()->back()->withErrors(['password' => 'Password yang dimasukkan salah.']);
         }
     }
+
+    public function api_showguru(Guru $guru)
+    {
+        return response()->json($guru);
+    }
 }

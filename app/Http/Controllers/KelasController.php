@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Guru;
 use App\Models\Kelas;
 use Illuminate\Http\Request;
 
@@ -15,14 +16,16 @@ class KelasController extends Controller
 
     public function create()
     {
-        return view('kelas.tambah');
+        $list_guru = Guru::paginate(10);
+        return view('kelas.tambah', compact('list_guru'));
     }
 
     public function store(Request $request)
     {
         $dataValid = $request->validate([
             'nama' => ['required', 'string', 'max:255'],
-            'tahun_ajaran' => ['required', 'string']
+            'tahun_ajaran' => ['required', 'string'],
+            'id_walikelas' => ['required']
         ]);
 
         $kelas = Kelas::where('nama', '%' . $request->nama . '%')->where('tahun_ajaran', $request->tahun_ajaran)->first();

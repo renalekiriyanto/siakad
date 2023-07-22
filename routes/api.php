@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\MatapelajaranController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -18,3 +19,4 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('getmapel/{mapel}', [MatapelajaranController::class, 'api_getdetail']);
 Route::get('getkelas/{kelas}', [KelasController::class, 'api_getdetail']);
+Route::get('getshowguru/{guru}', [UserController::class, 'api_showguru']);
