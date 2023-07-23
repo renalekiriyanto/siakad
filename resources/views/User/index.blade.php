@@ -27,6 +27,9 @@
                     <div class="col-12">
                         <div class="mb-3">
                             <a href="{{ route('tambah_user') }}" class="btn btn-primary">Tambah</a>
+                            <button class="btn btn-primary" data-toggle="modal" data-target="#modal-uploadsiswa">Import
+                                Siswa</button>
+                            <a href="{{ route('tambah_user') }}" class="btn btn-primary">Import Guru</a>
                         </div>
                         <div class="card">
                             <div class="card-header">
@@ -38,6 +41,36 @@
                                     <div id="session-message" class="alert alert-success alert-dismissible fade show"
                                         role="alert">
                                         <strong>Sukses!</strong> {{ session('status') }}.
+                                    </div>
+                                    <script>
+                                        // Menghilangkan pesan session secara otomatis setelah 3 detik
+                                        setTimeout(function() {
+                                            var sessionMessage = document.getElementById('session-message');
+                                            if (sessionMessage) {
+                                                sessionMessage.remove();
+                                            }
+                                        }, 3000);
+                                    </script>
+                                @endif
+                                @if (session('success'))
+                                    <div id="session-message" class="alert alert-success alert-dismissible fade show"
+                                        role="alert">
+                                        <strong>Sukses!</strong> {{ session('success') }}.
+                                    </div>
+                                    <script>
+                                        // Menghilangkan pesan session secara otomatis setelah 3 detik
+                                        setTimeout(function() {
+                                            var sessionMessage = document.getElementById('session-message');
+                                            if (sessionMessage) {
+                                                sessionMessage.remove();
+                                            }
+                                        }, 3000);
+                                    </script>
+                                @endif
+                                @if (session('error'))
+                                    <div id="session-message" class="alert alert-danger alert-dismissible fade show"
+                                        role="alert">
+                                        <strong>Sukses!</strong> {{ session('error') }}.
                                     </div>
                                     <script>
                                         // Menghilangkan pesan session secara otomatis setelah 3 detik
@@ -122,5 +155,29 @@
                 </div>
             </div>
         </section>
+    </div>
+    <div class="modal fade" id="modal-uploadsiswa">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Import Siswa</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="{{ route('import_user_siswa') }}" method="post" enctype="multipart/form-data">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <input type="file" name="file" id="file" class="form-control">
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 @endsection

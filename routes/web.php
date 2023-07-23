@@ -33,7 +33,13 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::prefix('user')->middleware(['permission:list user|tambah user|edit user|delete user'])->group(function () {
         Route::get('/', [UserController::class, 'index'])->name('user');
         Route::post('/{user}', [UserController::class, 'lock_user'])->name('lock_user');
-        Route::get('tambah', [UserController::class, 'tambah'])->name('tambah_user');
+        Route::prefix('tambah')->group(function () {
+            Route::get('/', [UserController::class, 'tambah'])->name('tambah_user');
+            Route::prefix('import')->group(function () {
+                Route::post('guru', [UserController::class, 'import_guru'])->name('import_user_guru');
+                Route::post('siswa', [UserController::class, 'import_siswa'])->name('import_user_siswa');
+            });
+        });
         Route::get('edit/{user}', [UserController::class, 'edit'])->name('edit_user');
         Route::post('edit/{user}', [UserController::class, 'update'])->name('update_user');
         Route::prefix('permission')->group(function () {
