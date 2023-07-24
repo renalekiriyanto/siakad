@@ -60,4 +60,24 @@ class User extends Authenticatable
             return 'Admin';
         }
     }
+
+    public function scopeFilter($query, array $filters)
+    {
+        $query->when($filters['search'] ?? false, function ($query, $search) {
+            return $query->where('name', 'like', "%$search%")
+                ->orWhere('email', 'like', "%$search%")
+                ->orWhere('username', 'like', "%$search%")
+                ->orWhere('role', function ($query) use ($search) {
+                    $query->where('name', 'like', "%$search%");
+                })
+                ->orWhere('table_detail', function ($query) use ($search) {
+                    $query->where('nis', 'like', "%$search%")
+                        ->orWhere('nisn', 'like', "%$search%")
+                        ->orWhere('nip', 'like', "%$search%")
+                        ->orWhere('nuptk', 'like', "%$search%")
+                        ->orWhere('nrg', 'like', "%$search%")
+                        ->orWhere('nik', 'like', "%$search%");
+                });
+        });
+    }
 }

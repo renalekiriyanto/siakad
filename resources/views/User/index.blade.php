@@ -37,6 +37,16 @@
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
+                                <form action="{{ route('user') }}" class="mb-3" method="get">
+                                    <div class="input-group">
+                                        <input type="search" class="form-control" placeholder="Cari...">
+                                        <div class="input-group-append" name="search" id="search">
+                                            <button type="submit" class="btn btn-default">
+                                                <i class="fa fa-search"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
                                 @if (session('status'))
                                     <div id="session-message" class="alert alert-success alert-dismissible fade show"
                                         role="alert">

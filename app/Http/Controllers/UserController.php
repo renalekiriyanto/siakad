@@ -32,9 +32,9 @@ class UserController extends Controller
         });
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $data = User::paginate(10);
+        $data = User::filter(request(['search']))->paginate(10);
         $user = $this->user;
 
         return view('User.index', compact('data', 'user'));
