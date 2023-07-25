@@ -39,8 +39,9 @@
                             <div class="card-body">
                                 <form action="{{ route('user') }}" class="mb-3" method="get">
                                     <div class="input-group">
-                                        <input type="search" class="form-control" placeholder="Cari...">
-                                        <div class="input-group-append" name="search" id="search">
+                                        <input type="search" name="search" id="search" class="form-control"
+                                            placeholder="Cari...">
+                                        <div class="input-group-append">
                                             <button type="submit" class="btn btn-default">
                                                 <i class="fa fa-search"></i>
                                             </button>
