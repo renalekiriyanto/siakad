@@ -82,6 +82,7 @@
                                         <tr>
                                             <th>Nama</th>
                                             <th>Tahun Ajaran</th>
+                                            <th>Wali Kelas</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
@@ -90,6 +91,7 @@
                                             <tr key={{ $item->id }}>
                                                 <td>{{ $item->nama }}</td>
                                                 <td>{{ $item->tahun_ajaran }}</td>
+                                                <td>{{ $item->walikelas->user->name }}</td>
                                                 <td class="d-flex align-content-between">
                                                     <a href="{{ route('kelas.edit', $item->id) }}" class="btn btn-success">
                                                         <i class="fas fa-pen"></i>
