@@ -62,6 +62,17 @@
                                         }, 3000);
                                     </script>
                                 @endif
+                                <form action="" method="get" class="mb-3">
+                                    <div class="input-group">
+                                        <input type="search" name="search" id="search" class="form-control"
+                                            placeholder="Cari..." value="{{ old('search', request('search')) }}">
+                                        <div class="input-group-append">
+                                            <button type="submit" class="btn btn-default">
+                                                <i class="fa fa-search"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
                                 <table id="example2" class="table table-bordered table-hover">
                                     <thead>
                                         <tr>
