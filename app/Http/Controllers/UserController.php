@@ -34,10 +34,10 @@ class UserController extends Controller
 
     public function index(Request $request)
     {
-        $data = User::search($request->search)->paginate(10);
+        $data = User::filter(request(['search', 'role']))->paginate(10);
         $user = $this->user;
-
-        return view('User.index', compact('data', 'user'));
+        $list_role = Role::all();
+        return view('User.index', compact('data', 'user', 'list_role'));
     }
 
     public function tambah()

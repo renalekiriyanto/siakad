@@ -13,7 +13,7 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, HasRoles, Searchable;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -62,37 +62,18 @@ class User extends Authenticatable
         }
     }
 
-    public function scopeFilter($query, array $filters)
+    public function scopeFilter($query, $filters = [])
     {
         $query->when($filters['search'] ?? false, function ($query, $search) {
             return $query->where('name', 'like', "%$search%")
                 ->orWhere('email', 'like', "%$search%")
-                ->orWhere('username', 'like', "%$search%")
-                ->orWhere('role', function ($query) use ($search) {
-                    $query->where('name', 'like', "%$search%");
-                })
-                ->orWhere('table_detail', function ($query) use ($search) {
-                    $query->where('nis', 'like', "%$search%")
-                        ->orWhere('nisn', 'like', "%$search%")
-                        ->orWhere('nip', 'like', "%$search%")
-                        ->orWhere('nuptk', 'like', "%$search%")
-                        ->orWhere('nrg', 'like', "%$search%")
-                        ->orWhere('nik', 'like', "%$search%");
-                });
+                ->orWhere('username', 'like', "%$search%");
         });
-    }
 
-    public function searchableAs()
-    {
-        return 'user';
-    }
-
-    public function toSearchableArray()
-    {
-        return [
-            'name' => $this->name,
-            'email' => $this->email,
-            'username' => $this->username
-        ];
+        $query->when($filters['role'] ?? false, function ($query, $role) {
+            return $query->whereHas('role', function ($query) use ($role) {
+                $query->where('id', $role);
+            });
+        });
     }
 }

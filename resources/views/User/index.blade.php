@@ -37,14 +37,28 @@
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
-                                <form action="{{ route('user') }}" class="mb-3" method="get">
-                                    <div class="input-group">
-                                        <input type="search" name="search" id="search" class="form-control"
-                                            placeholder="Cari...">
-                                        <div class="input-group-append">
-                                            <button type="submit" class="btn btn-default">
-                                                <i class="fa fa-search"></i>
-                                            </button>
+                                <form action="{{ route('user') }}" class="mb-3" method="get" id="form_filter">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <select name="role" id="role" class="form-control">
+                                                    <option value="">---Pilih Role---</option>
+                                                    @foreach ($list_role as $item)
+                                                        <option value="{{ $item->id }}">{{ $item->full_name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="input-group">
+                                                <input type="search" name="search" id="search" class="form-control"
+                                                    placeholder="Cari..." value="{{ old('search', request('search')) }}">
+                                                <div class="input-group-append">
+                                                    <button type="submit" class="btn btn-default">
+                                                        <i class="fa fa-search"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </form>
@@ -191,4 +205,12 @@
             </div>
         </div>
     </div>
+    <script>
+        let form_filter = document.getElementById('form_filter');
+        let role = document.getElementById('role');
+
+        role.addEventListener('change', () => {
+            form_filter.submit();
+        });
+    </script>
 @endsection
